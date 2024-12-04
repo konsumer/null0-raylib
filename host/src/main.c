@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+#include <raylib.h>
 
 #ifdef _WINDOWS
 #include <windows.h>
@@ -48,16 +49,18 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  // printf("loaded: %s\n", cartFilename);
+  SetTraceLogLevel(LOG_ERROR);
 
-  #ifdef EMSCRIPTEN
-    emscripten_set_main_loop(wasm_host_update, 60, false);
-  #else
-    while(keepRunning) {
-      wasm_host_update();
-      sleep(0.016f); // ~60fps
-    }
-  #endif
+  InitWindow(640, 480, "null0");
+  SetTargetFPS(60);
+
+  while (!WindowShouldClose()) {
+    BeginDrawing();
+    wasm_host_update();
+    EndDrawing();
+  }
+
+  CloseWindow();
 
   wasm_host_unload();
   return 0;

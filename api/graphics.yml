@@ -1,0 +1,5 @@
+clear:
+  description: Clear screen with color
+  returns: void
+  arguments:
+    color: Color

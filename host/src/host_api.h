@@ -71,3 +71,11 @@ HOST_FUNCTION(u32, test_struct_out, (), {
   TestPoint result = { .x=1111, .y=2222 };
   return copy_to_cart(&result, sizeof(result));
 })
+
+// GRAPHICS API
+
+// Clear screen with color
+HOST_FUNCTION(void, clear, (u32 colorPtr), {
+  Color* color = copy_from_cart(colorPtr, sizeof(Color));
+  ClearBackground(*color);
+})
