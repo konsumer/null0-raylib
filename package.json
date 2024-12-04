@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "start:web": "live-server docs",
+    "build:native": "cmake -G Ninja -B build && cmake --build build --target null0",
+    "build:web": "emcmake cmake -G Ninja -B wbuild && cmake --build wbuild --target null0",
+    "build:carts": "cmake -G Ninja -B build && cmake --build build --target runtests --target as_runtests",
+    "watch:carts": "nodemon -w ./cart -e c,cpp,h,png,ts -x 'npm run build:carts'",
+    "watch:web": "nodemon -w ./host -e c,cpp,h -x 'npm run build:web'",
+    "clean": "rm -rf wbuild build docs/carts/* docs/host.mjs",
+    "start": "run-p build:web build:carts && run-p start:web watch:web watch:carts",
+    "build": "npm run build:carts && npm run build:native && npm run build:web"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.27.31",
+    "glob": "^10.4.5",
+    "live-server": "^1.2.2",
+    "nodemon": "^3.1.7",
+    "npm-run-all": "^4.1.5",
+    "yaml": "^2.6.1"
+  },
+  "type": "module"
+}
