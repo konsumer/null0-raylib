@@ -78,4 +78,5 @@ HOST_FUNCTION(u32, test_struct_out, (), {
 HOST_FUNCTION(void, clear, (u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
   ClearBackground(*color);
+  free(color);
 })

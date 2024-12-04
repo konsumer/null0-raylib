@@ -4,5 +4,6 @@ void update(uint64_t timeMS) {
   clear(RED);
 }
 
-void load(){
+int main(int argc, char *argv[]) {
+  return 0;
 }

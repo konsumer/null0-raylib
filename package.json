@@ -3,7 +3,7 @@
     "start:web": "live-server docs",
     "build:native": "cmake -G Ninja -B build && cmake --build build --target null0",
     "build:web": "emcmake cmake -G Ninja -DPLATFORM=Web -B wbuild && cmake --build wbuild --target null0",
-    "build:carts": "cmake -G Ninja -B build && cmake --build build --target graphics",
+    "build:carts": "cmake -G Ninja -B build && cmake --build build --target graphics --target runtests",
     "watch:carts": "nodemon -w ./cart -e c,cpp,h,png,ts -x 'npm run build:carts'",
     "watch:web": "nodemon -w ./host -e c,cpp,h -x 'npm run build:web'",
     "clean": "rm -rf wbuild build docs/carts/* docs/host.mjs",

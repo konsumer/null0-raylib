@@ -1,6 +1,15 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+typedef uint8_t u8;
+typedef uint16_t u16;
+typedef uint32_t u32;
+typedef int8_t i8;
+typedef int16_t i16;
+typedef int32_t i32;
+typedef float f32;
+typedef double f64;
+
 // import function from host
 #define HOST_FUNCTION(return_type, name, params) __attribute__((import_module("null0"), import_name(#name))) return_type name params;
 
@@ -31,10 +40,10 @@ void unload();
 
 
 typedef struct {
-  unsigned int r;
-  unsigned int g;
-  unsigned int b;
-  unsigned int a;
+  u8 r;
+  u8 g;
+  u8 b;
+  u8 a;
 } Color;
 
 Color LIGHTGRAY = (Color){.r = 200, .g = 200, .b = 200, .a = 255};
