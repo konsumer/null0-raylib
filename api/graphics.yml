@@ -1,5 +1,713 @@
+new_image:
+  arguments:
+    width: i32
+    height: i32
+    color: Color
+  returns: Image
+  description: Create a new blank image
+
+image_copy:
+  arguments:
+    image: Image
+  returns: Image
+  description: Copy an image to a new image
+
+image_subimage:
+  arguments:
+    image: Image
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+  returns: Image
+  description: Create an image from a region of another image
+
 clear:
-  description: Clear screen with color
-  returns: void
   arguments:
     color: Color
+  returns: void
+  description: Clear the screen
+
+draw_point:
+  arguments:
+    x: i32
+    y: i32
+    color: Color
+  returns: void
+  description: Draw a single pixel on the screen
+
+draw_line:
+  arguments:
+    startPosX: i32
+    startPosY: i32
+    endPosX: i32
+    endPosY: i32
+    color: Color
+  returns: void
+  description: Draw a line on the screen
+
+draw_rectangle:
+  arguments:
+    posX: i32
+    posY: i32
+    width: i32
+    height: i32
+    color: Color
+  returns: void
+  description: Draw a filled rectangle on the screen
+
+draw_triangle:
+  arguments:
+    x1: i32
+    y1: i32
+    x2: i32
+    y2: i32
+    x3: i32
+    y3: i32
+    color: Color
+  returns: void
+  description: Draw a filled triangle on the screen
+
+draw_ellipse:
+  arguments:
+    centerX: i32
+    centerY: i32
+    radiusX: i32
+    radiusY: i32
+    color: Color
+  returns: void
+  description: Draw a filled ellipse on the screen
+
+draw_circle:
+  arguments:
+    centerX: i32
+    centerY: i32
+    radius: i32
+    color: Color
+  returns: void
+  description: Draw a filled circle on the screen
+
+draw_polygon:
+  arguments:
+    numPoints: i32
+    points: Vector[]
+    color: Color
+  returns: void
+  description: Draw a filled polygon on the screen
+
+draw_polyline:
+  arguments:
+    numPoints: i32
+    points: Vector[]
+    color: Color
+  returns: void
+  description: Draw several lines on the screen
+
+draw_arc:
+  arguments:
+    centerX: i32
+    centerY: i32
+    radius: f32
+    startAngle: f32
+    endAngle: f32
+    segments: i32
+    color: Color
+  returns: void
+  description: Draw a filled arc on the screen
+
+draw_rectangle_rounded:
+  arguments:
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+    cornerRadius: i32
+    color: Color
+  returns: void
+  description: Draw a filled round-rectangle on the screen
+
+draw_image:
+  arguments:
+    src: Image
+    posX: i32
+    posY: i32
+  returns: void
+  description: Draw an image on the screen
+
+draw_image_tint:
+  arguments:
+    src: Image
+    posX: i32
+    posY: i32
+    tint: Color
+  returns: void
+  description: Draw a tinted image on the screen
+
+draw_image_rotated:
+  arguments:
+    src: Image
+    posX: i32
+    posY: i32
+    degrees: f32
+    offsetX: f32
+    offsetY: f32
+    filter: ImageFilter
+  returns: void
+  description: Draw an image, rotated, on the screen
+
+draw_image_flipped:
+  arguments:
+    src: Image
+    posX: i32
+    posY: i32
+    flipHorizontal: bool
+    flipVertical: bool
+    flipDiagonal: bool
+  returns: void
+  description: Draw an image, flipped, on the screen
+
+draw_image_scaled:
+  arguments:
+    src: Image
+    posX: i32
+    posY: i32
+    scaleX: f32
+    scaleY: f32
+    offsetX: f32
+    offsetY: f32
+    filter: ImageFilter
+  returns: void
+  description: Draw an image, scaled, on the screen
+
+draw_text:
+  arguments:
+    font: Font
+    text: string
+    posX: i32
+    posY: i32
+    color: Color
+  returns: void
+  description: Draw some text on the screen
+
+save_image:
+  arguments:
+    image: Image
+    filename: string
+  returns: void
+  description: Save an image to persistant storage
+
+load_image:
+  arguments:
+    filename: string
+  returns: Image
+  description: Load an image from a file in cart
+
+image_resize:
+  arguments:
+    image: Image
+    newWidth: i32
+    newHeight: i32
+    offsetX: i32
+    offsetY: i32
+    fill: Color
+  returns: void
+  description: Resize an image, in-place
+
+image_scale:
+  arguments:
+    image: Image
+    scaleX: f32
+    scaleY: f32
+    filter: ImageFilter
+  returns: void
+  description: Scale an image, in-place
+
+image_color_replace:
+  arguments:
+    image: Image
+    color: Color
+    replace: Color
+  returns: void
+  description: Replace a color in an image, in-place
+
+image_color_tint:
+  arguments:
+    image: Image
+    color: Color
+  returns: void
+  description: Tint a color in an image, in-place
+
+image_color_fade:
+  arguments:
+    image: Image
+    alpha: f32
+  returns: void
+  description: Fade a color in an image, in-place
+
+font_copy:
+  arguments:
+    font: Font
+  returns: Font
+  description: Copy a font to a new font
+
+font_scale:
+  arguments:
+    font: Font
+    scaleX: f32
+    scaleY: f32
+    filter: ImageFilter
+  returns: Font
+  description: Scale a font, return a new font
+
+load_font_bmf:
+  arguments:
+    filename: string
+    characters: string
+  returns: Font
+  description: Load a BMF font from a file in cart
+
+load_font_bmf_from_image:
+  arguments:
+    image: Image
+    characters: string
+  returns: Font
+  description: Load a BMF font from an image
+
+measure_text:
+  arguments:
+    font: Font
+    text: string
+  returns: Dimensions
+  description: Measure the size of some text
+
+measure_image:
+  arguments:
+    image: Image
+  returns: Dimensions
+  description: Meaure an image (use 0 for screen)
+
+load_font_tty:
+  arguments:
+    filename: string
+    glyphWidth: i32
+    glyphHeight: i32
+    characters: string
+  returns: Font
+  description: Load a TTY font from a file in cart
+
+load_font_tty_from_image:
+  arguments:
+    image: Image
+    glyphWidth: i32
+    glyphHeight: i32
+    characters: string
+  returns: Font
+  description: Load a TTY font from an image
+
+load_font_ttf:
+  arguments:
+    filename: string
+    fontSize: i32
+  returns: Font
+  description: Load a TTF font from a file in cart
+
+image_color_invert:
+  arguments:
+    image: Image
+  returns: void
+  description: Invert the colors in an image, in-place
+
+image_alpha_border:
+  arguments:
+    image: Image
+    threshold: f32
+  returns: Rectangle
+  description: Calculate a rectangle representing the available alpha border in an image
+
+image_crop:
+  arguments:
+    image: Image
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+  returns: void
+  description: Crop an image, in-place
+
+image_alpha_crop:
+  arguments:
+    image: Image
+    threshold: f32
+  returns: void
+  description: Crop an image based on the alpha border, in-place
+
+image_color_brightness:
+  arguments:
+    image: Image
+    factor: f32
+  returns: void
+  description: Adjust the brightness of an image, in-place
+
+image_flip:
+  arguments:
+    image: Image
+    horizontal: bool
+    vertical: bool
+  returns: void
+  description: Flip an image, in-place
+
+image_color_contrast:
+  arguments:
+    image: Image
+    contrast: f32
+  returns: void
+  description: Change the contrast of an image, in-place
+
+image_alpha_mask:
+  arguments:
+    image: Image
+    alphaMask: Image
+    posX: i32
+    posY: i32
+  returns: void
+  description: Use an image as an alpha-mask on another image
+
+image_rotate:
+  arguments:
+    image: Image
+    degrees: f32
+    filter: ImageFilter
+  returns: Image
+  description: Create a new image, rotating another image
+
+image_gradient:
+  arguments:
+    width: i32
+    height: i32
+    topLeft: Color
+    topRight: Color
+    bottomLeft: Color
+    bottomRight: Color
+  returns: Image
+  description: Create a new image of a gradient
+
+unload_image:
+  arguments:
+    image: Image
+  returns: void
+  description: Unload an image
+
+unload_font:
+  arguments:
+    font: Font
+  returns: void
+  description: Unload a font
+
+clear_on_image:
+  arguments:
+    destination: Image
+    color: Color
+  returns: void
+  description: Clear an image
+
+draw_point_on_image:
+  arguments:
+    destination: Image
+    x: i32
+    y: i32
+    color: Color
+  returns: void
+  description: Draw a single pixel on an image
+
+draw_line_on_image:
+  arguments:
+    destination: Image
+    startPosX: i32
+    startPosY: i32
+    endPosX: i32
+    endPosY: i32
+    color: Color
+  returns: void
+  description: Draw a line on an image
+
+draw_rectangle_on_image:
+  arguments:
+    destination: Image
+    posX: i32
+    posY: i32
+    width: i32
+    height: i32
+    color: Color
+  returns: void
+  description: Draw a filled rectangle on an image
+
+draw_triangle_on_image:
+  arguments:
+    destination: Image
+    x1: i32
+    y1: i32
+    x2: i32
+    y2: i32
+    x3: i32
+    y3: i32
+    color: Color
+  returns: void
+  description: Draw a filled triangle on an image
+
+draw_ellipse_on_image:
+  arguments:
+    destination: Image
+    centerX: i32
+    centerY: i32
+    radiusX: i32
+    radiusY: i32
+    color: Color
+  returns: void
+  description: Draw a filled ellipse on an image
+
+draw_circle_on_image:
+  arguments:
+    destination: Image
+    centerX: i32
+    centerY: i32
+    radius: i32
+    color: Color
+  returns: void
+  description: Draw a circle on an image
+
+draw_polygon_on_image:
+  arguments:
+    destination: Image
+    numPoints: i32
+    points: Vector[]
+    color: Color
+  returns: void
+  description: Draw a filled polygon on an image
+
+draw_polyline_on_image:
+  arguments:
+    destination: Image
+    numPoints: i32
+    points: Vector[]
+    color: Color
+  returns: void
+  description: Draw several lines on an image
+
+draw_rectangle_rounded_on_image:
+  arguments:
+    destination: Image
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+    cornerRadius: i32
+    color: Color
+  returns: void
+  description: Draw a filled round-rectangle on an image
+
+draw_image_on_image:
+  arguments:
+    destination: Image
+    src: Image
+    posX: i32
+    posY: i32
+  returns: void
+  description: Draw an image on an image
+
+draw_image_tint_on_image:
+  arguments:
+    destination: Image
+    src: Image
+    posX: i32
+    posY: i32
+    tint: Color
+  returns: void
+  description: Draw a tinted image on an image
+
+draw_image_rotated_on_image:
+  arguments:
+    destination: Image
+    src: Image
+    posX: i32
+    posY: i32
+    degrees: f32
+    offsetX: f32
+    offsetY: f32
+    filter: ImageFilter
+  returns: void
+  description: Draw an image, rotated, on an image
+
+draw_image_flipped_on_image:
+  arguments:
+    destination: Image
+    src: Image
+    posX: i32
+    posY: i32
+    flipHorizontal: bool
+    flipVertical: bool
+    flipDiagonal: bool
+  returns: void
+  description: Draw an image, flipped, on an image
+
+draw_image_scaled_on_image:
+  arguments:
+    destination: Image
+    src: Image
+    posX: i32
+    posY: i32
+    scaleX: f32
+    scaleY: f32
+    offsetX: f32
+    offsetY: f32
+    filter: ImageFilter
+  returns: void
+  description: Draw an image, scaled, on an image
+
+draw_text_on_image:
+  arguments:
+    destination: Image
+    font: Font
+    text: string
+    posX: i32
+    posY: i32
+    color: Color
+  returns: void
+  description: Draw some text on an image
+
+draw_rectangle_outline:
+  arguments:
+    posX: i32
+    posY: i32
+    width: i32
+    height: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined rectangle on the screen
+
+draw_triangle_outline:
+  arguments:
+    x1: i32
+    y1: i32
+    x2: i32
+    y2: i32
+    x3: i32
+    y3: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined triangle on the screen
+
+draw_ellipse_outline:
+  arguments:
+    centerX: i32
+    centerY: i32
+    radiusX: i32
+    radiusY: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined ellipse on the screen
+
+draw_circle_outline:
+  arguments:
+    centerX: i32
+    centerY: i32
+    radius: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined circle on the screen
+
+draw_polygon_outline:
+  arguments:
+    numPoints: i32
+    points: Vector[]
+    color: Color
+  returns: void
+  description: Draw a 1px outlined polygon on the screen
+
+draw_arc_outline:
+  arguments:
+    centerX: i32
+    centerY: i32
+    radius: f32
+    startAngle: f32
+    endAngle: f32
+    segments: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined arc on the screen
+
+draw_rectangle_rounded_outline:
+  arguments:
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+    cornerRadius: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined round-rectangle on the screen
+
+draw_rectangle_outline_on_image:
+  arguments:
+    destination: Image
+    posX: i32
+    posY: i32
+    width: i32
+    height: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined rectangle on an image
+
+draw_triangle_outline_on_image:
+  arguments:
+    destination: Image
+    x1: i32
+    y1: i32
+    x2: i32
+    y2: i32
+    x3: i32
+    y3: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined triangle on an image
+
+draw_ellipse_outline_on_image:
+  arguments:
+    destination: Image
+    centerX: i32
+    centerY: i32
+    radiusX: i32
+    radiusY: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined ellipse on an image
+
+draw_circle_outline_on_image:
+  arguments:
+    destination: Image
+    centerX: i32
+    centerY: i32
+    radius: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined circle on an image
+
+draw_polygon_outline_on_image:
+  arguments:
+    destination: Image
+    numPoints: i32
+    points: Vector[]
+    color: Color
+  returns: void
+  description: Draw a 1px outlined polygon on an image
+
+draw_rectangle_rounded_outline_on_image:
+  arguments:
+    destination: Image
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+    cornerRadius: i32
+    color: Color
+  returns: void
+  description: Draw a 1px outlined round-rectangle on an image
