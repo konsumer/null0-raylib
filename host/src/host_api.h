@@ -161,20 +161,9 @@ HOST_FUNCTION(void, draw_circle, (i32 centerX, i32 centerY, i32 radius, u32 colo
 })
 
 // Draw a filled polygon on the screen
-HOST_FUNCTION(void, draw_polygon, (i32 numPoints, u32 pointsPtr, u32 pointsLen, u32 colorPtr), {
-  u8* points = copy_from_cart(pointsPtr, pointsLen);
+HOST_FUNCTION(void, draw_polygon, (i32 centerX, i32 centerY, u32 sides, i32 radius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
-  // TODO
-  free(points);
-  free(color);
-})
-
-// Draw several lines on the screen
-HOST_FUNCTION(void, draw_polyline, (i32 numPoints, u32 pointsPtr, u32 pointsLen, u32 colorPtr), {
-  u8* points = copy_from_cart(pointsPtr, pointsLen);
-  Color* color = copy_from_cart(colorPtr, sizeof(Color));
-  // TODO
-  free(points);
+  DrawPoly(Vector2 (Vector2){.x=centerX, .y=centerY}, sides, (float) radius, 0, *color); 
   free(color);
 })
 
@@ -186,9 +175,9 @@ HOST_FUNCTION(void, draw_arc, (i32 centerX, i32 centerY, f32 radius, f32 startAn
 })
 
 // Draw a filled round-rectangle on the screen
-HOST_FUNCTION(void, draw_rectangle_rounded, (i32 x, i32 y, i32 width, i32 height, i32 cornerRadius, u32 colorPtr), {
+HOST_FUNCTION(void, draw_rectangle_rounded, (i32 x, i32 y, i32 width, i32 height, f32 cornerRadius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
-  // TODO
+  DrawRectangleRounded(Rectangle (Rectangle){.x=x, .y=y, .width=width, .height=height}, cornerRadius, 0, *color); 
   free(color);
 })
 
@@ -466,25 +455,14 @@ HOST_FUNCTION(void, draw_circle_on_image, (u32 destinationPtr, i32 centerX, i32 
 })
 
 // Draw a filled polygon on an image
-HOST_FUNCTION(void, draw_polygon_on_image, (u32 destinationPtr, i32 numPoints, u32 pointsPtr, u32 pointsLen, u32 colorPtr), {
-  u8* points = copy_from_cart(pointsPtr, pointsLen);
+HOST_FUNCTION(void, draw_polygon_on_image, (u32 destinationPtr, i32 centerX, i32 centerY, u32 sides, i32 radius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
   // TODO
-  free(points);
-  free(color);
-})
-
-// Draw several lines on an image
-HOST_FUNCTION(void, draw_polyline_on_image, (u32 destinationPtr, i32 numPoints, u32 pointsPtr, u32 pointsLen, u32 colorPtr), {
-  u8* points = copy_from_cart(pointsPtr, pointsLen);
-  Color* color = copy_from_cart(colorPtr, sizeof(Color));
-  // TODO
-  free(points);
   free(color);
 })
 
 // Draw a filled round-rectangle on an image
-HOST_FUNCTION(void, draw_rectangle_rounded_on_image, (u32 destinationPtr, i32 x, i32 y, i32 width, i32 height, i32 cornerRadius, u32 colorPtr), {
+HOST_FUNCTION(void, draw_rectangle_rounded_on_image, (u32 destinationPtr, i32 x, i32 y, i32 width, i32 height, f32 cornerRadius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
   // TODO
   free(color);
@@ -555,11 +533,9 @@ HOST_FUNCTION(void, draw_circle_outline, (i32 centerX, i32 centerY, i32 radius, 
 })
 
 // Draw a 1px outlined polygon on the screen
-HOST_FUNCTION(void, draw_polygon_outline, (i32 numPoints, u32 pointsPtr, u32 pointsLen, u32 colorPtr), {
-  u8* points = copy_from_cart(pointsPtr, pointsLen);
+HOST_FUNCTION(void, draw_polygon_outline, (i32 centerX, i32 centerY, u32 sides, i32 radius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
   // TODO
-  free(points);
   free(color);
 })
 
@@ -571,7 +547,7 @@ HOST_FUNCTION(void, draw_arc_outline, (i32 centerX, i32 centerY, f32 radius, f32
 })
 
 // Draw a 1px outlined round-rectangle on the screen
-HOST_FUNCTION(void, draw_rectangle_rounded_outline, (i32 x, i32 y, i32 width, i32 height, i32 cornerRadius, u32 colorPtr), {
+HOST_FUNCTION(void, draw_rectangle_rounded_outline, (i32 x, i32 y, i32 width, i32 height, f32 cornerRadius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
   // TODO
   free(color);
@@ -606,16 +582,14 @@ HOST_FUNCTION(void, draw_circle_outline_on_image, (u32 destinationPtr, i32 cente
 })
 
 // Draw a 1px outlined polygon on an image
-HOST_FUNCTION(void, draw_polygon_outline_on_image, (u32 destinationPtr, i32 numPoints, u32 pointsPtr, u32 pointsLen, u32 colorPtr), {
-  u8* points = copy_from_cart(pointsPtr, pointsLen);
+HOST_FUNCTION(void, draw_polygon_outline_on_image, (u32 destinationPtr, i32 centerX, i32 centerY, u32 sides, i32 radius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
   // TODO
-  free(points);
   free(color);
 })
 
 // Draw a 1px outlined round-rectangle on an image
-HOST_FUNCTION(void, draw_rectangle_rounded_outline_on_image, (u32 destinationPtr, i32 x, i32 y, i32 width, i32 height, i32 cornerRadius, u32 colorPtr), {
+HOST_FUNCTION(void, draw_rectangle_rounded_outline_on_image, (u32 destinationPtr, i32 x, i32 y, i32 width, i32 height, f32 cornerRadius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
   // TODO
   free(color);

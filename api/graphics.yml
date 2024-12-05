@@ -89,19 +89,13 @@ draw_circle:
 
 draw_polygon:
   arguments:
-    numPoints: i32
-    points: Vector[]
+    centerX: i32
+    centerY: i32
+    sides: u32
+    radius: i32
     color: Color
   returns: void
   description: Draw a filled polygon on the screen
-
-draw_polyline:
-  arguments:
-    numPoints: i32
-    points: Vector[]
-    color: Color
-  returns: void
-  description: Draw several lines on the screen
 
 draw_arc:
   arguments:
@@ -121,7 +115,7 @@ draw_rectangle_rounded:
     y: i32
     width: i32
     height: i32
-    cornerRadius: i32
+    cornerRadius: f32
     color: Color
   returns: void
   description: Draw a filled round-rectangle on the screen
@@ -478,20 +472,13 @@ draw_circle_on_image:
 draw_polygon_on_image:
   arguments:
     destination: Image
-    numPoints: i32
-    points: Vector[]
+    centerX: i32
+    centerY: i32
+    sides: u32
+    radius: i32
     color: Color
   returns: void
   description: Draw a filled polygon on an image
-
-draw_polyline_on_image:
-  arguments:
-    destination: Image
-    numPoints: i32
-    points: Vector[]
-    color: Color
-  returns: void
-  description: Draw several lines on an image
 
 draw_rectangle_rounded_on_image:
   arguments:
@@ -500,7 +487,7 @@ draw_rectangle_rounded_on_image:
     y: i32
     width: i32
     height: i32
-    cornerRadius: i32
+    cornerRadius: f32
     color: Color
   returns: void
   description: Draw a filled round-rectangle on an image
@@ -617,8 +604,10 @@ draw_circle_outline:
 
 draw_polygon_outline:
   arguments:
-    numPoints: i32
-    points: Vector[]
+    centerX: i32
+    centerY: i32
+    sides: u32
+    radius: i32
     color: Color
   returns: void
   description: Draw a 1px outlined polygon on the screen
@@ -641,7 +630,7 @@ draw_rectangle_rounded_outline:
     y: i32
     width: i32
     height: i32
-    cornerRadius: i32
+    cornerRadius: f32
     color: Color
   returns: void
   description: Draw a 1px outlined round-rectangle on the screen
@@ -694,8 +683,10 @@ draw_circle_outline_on_image:
 draw_polygon_outline_on_image:
   arguments:
     destination: Image
-    numPoints: i32
-    points: Vector[]
+    centerX: i32
+    centerY: i32
+    sides: u32
+    radius: i32
     color: Color
   returns: void
   description: Draw a 1px outlined polygon on an image
@@ -707,7 +698,7 @@ draw_rectangle_rounded_outline_on_image:
     y: i32
     width: i32
     height: i32
-    cornerRadius: i32
+    cornerRadius: f32
     color: Color
   returns: void
   description: Draw a 1px outlined round-rectangle on an image
