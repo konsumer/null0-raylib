@@ -30,5 +30,5 @@ int cart_strlen(unsigned int cartPtr) {
 // copy a host-pointer to cart when you already have a cart-pointer
 void copy_from_cart_with_pointer(void* hostPtr, unsigned int cartPtr, unsigned int size) {
   void* cartHostPtr = wasm_runtime_addr_app_to_native(module_inst, (uint64_t)cartPtr);
-  memcpy(cartHostPtr, hostPtr, size);
+  memcpy(hostPtr, cartHostPtr, size);
 }
