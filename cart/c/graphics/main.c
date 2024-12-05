@@ -5,7 +5,7 @@ void update(uint64_t timeMS) {
   
   // shirt
   draw_rectangle(270, 320, 100, 100, GREEN);
-  draw_line(320, 340, 320, 420, RED);
+  draw_line(320, 340, 320, 420, BLUE);
 
   // pants
   draw_rectangle(270, 420, 100, 100, BLUE);
