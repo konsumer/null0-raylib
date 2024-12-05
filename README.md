@@ -1,5 +1,8 @@
 This is null0 host, implemented with raylib.
 
+> [!WARNING]  
+> I am just experimenting with ideas here. It has a long way to go.
+
 ## building
 
 ```
