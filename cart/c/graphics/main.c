@@ -1,7 +1,10 @@
 #include "cart.h"
 
 void update(uint64_t timeMS) {
-  clear(BLACK);
+  clear(SKYBLUE);
+
+  // ground
+  draw_rectangle(0, 400, 640, 80, BROWN);
   
   // shirt
   draw_rectangle(270, 320, 100, 100, GREEN);
