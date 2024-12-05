@@ -23,99 +23,6 @@ typedef u32 Sound;
 // export function to host
 #define CART_FUNCTION(n) __attribute__((export_name(n)))
 
-// mem-management
-
-CART_FUNCTION("malloc")
-void* _wasm_host_malloc(size_t size) {
-  return malloc(size);
-}
-
-CART_FUNCTION("free")
-void _wasm_host_free(void* ptr) {
-  free(ptr);
-}
-
-// callbacks
-CART_FUNCTION("load")
-void load();
-
-CART_FUNCTION("update")
-void update(uint64_t timeMS);
-
-CART_FUNCTION("unload")
-void unload();
-
-
-typedef struct {
-  u32 width;
-  u32 height;
-} Dimensions;
-
-typedef struct {
-  i32 x;
-  i32 y;
-} Vector;
-
-typedef struct {
-  i32 x;
-  i32 y;
-  i32 width;
-  i32 height;
-} Rectangle;
-
-// Sound parameters (96 bytes matching rFXGen WaveParams)
-typedef struct SfxParams {
-  // Random seed used to generate the wave
-  uint32_t randSeed;
-
-  // Wave type (square, sawtooth, sine, noise)
-  int waveType;
-
-  // Wave envelope parameters
-  float attackTime;
-  float sustainTime;
-  float sustainPunch;
-  float decayTime;
-
-  // Frequency parameters
-  float startFrequency;
-  float minFrequency;
-  float slide;
-  float deltaSlide;
-  float vibratoDepth;
-  float vibratoSpeed;
-  // float vibratoPhaseDelay;      // Unused in sfxr code.
-
-  // Tone change parameters
-  float changeAmount;
-  float changeSpeed;
-
-  // Square wave parameters
-  float squareDuty;
-  float dutySweep;
-
-  // Repeat parameters
-  float repeatSpeed;
-
-  // Phaser parameters
-  float phaserOffset;
-  float phaserSweep;
-
-  // Filter parameters
-  float lpfCutoff;
-  float lpfCutoffSweep;
-  float lpfResonance;
-  float hpfCutoff;
-  float hpfCutoffSweep;
-} SfxParams;
-
-typedef struct {
-  u8 r;
-  u8 g;
-  u8 b;
-  u8 a;
-} Color;
-
 typedef enum ImageFilter {
   FILTER_NEARESTNEIGHBOR = 0,
   FILTER_BILINEAR,
@@ -295,19 +202,84 @@ typedef enum SfxWaveType {
 } SfxWaveType;
 
 typedef enum FileType {
-  FILETYPE_REGULAR,   /**< a normal file */
-  FILETYPE_DIRECTORY, /**< a directory */
-  FILETYPE_SYMLINK,   /**< a symlink */
-  FILETYPE_OTHER      /**< something completely different like a device */
+  FILETYPE_REGULAR,   // a normal file 
+  FILETYPE_DIRECTORY, // a directory 
+  FILETYPE_SYMLINK,   // a symlink 
+  FILETYPE_OTHER      // something completely different like a device 
 } FileType;
 
+typedef struct {
+  u32 width;
+  u32 height;
+} Dimensions;
+
+typedef struct {
+  i32 x;
+  i32 y;
+} Vector;
+
+typedef struct {
+  i32 x;
+  i32 y;
+  i32 width;
+  i32 height;
+} Rectangle;
+
+// Sound parameters
+typedef struct SfxParams {
+  SfxWaveType waveType;
+
+  // Wave envelope parameters
+  float attackTime;
+  float sustainTime;
+  float sustainPunch;
+  float decayTime;
+
+  // Frequency parameters
+  float startFrequency;
+  float minFrequency;
+  float slide;
+  float deltaSlide;
+  float vibratoDepth;
+  float vibratoSpeed;
+
+  // Tone change parameters
+  float changeAmount;
+  float changeSpeed;
+
+  // Square wave parameters
+  float squareDuty;
+  float dutySweep;
+
+  // Repeat parameters
+  float repeatSpeed;
+
+  // Phaser parameters
+  float phaserOffset;
+  float phaserSweep;
+
+  // Filter parameters
+  float lpfCutoff;
+  float lpfCutoffSweep;
+  float lpfResonance;
+  float hpfCutoff;
+  float hpfCutoffSweep;
+} SfxParams;
+
+typedef struct {
+  u8 r;
+  u8 g;
+  u8 b;
+  u8 a;
+} Color;
+
 typedef struct FileInfo {
-  i64 filesize;      /**< size in bytes, -1 for non-files and unknown */
-  i64 modtime;       /**< last modification time */
-  i64 createtime;    /**< like modtime, but for file creation time */
-  i64 accesstime;    /**< like modtime, but for file access time */
-  FileType filetype; /**< File? Directory? Symlink? */
-  bool readonly;     /**< non-zero if read only, zero if writable. */
+  i64 filesize;      // size in bytes, -1 for non-files and unknown 
+  i64 modtime;       // last modification time 
+  i64 createtime;    // like modtime, but for file creation time 
+  i64 accesstime;    // like modtime, but for file access time 
+  FileType filetype; // File? Directory? Symlink? 
+  bool readonly;     // non-zero if read only, zero if writable. 
 } FileInfo;
 
 #define WIDTH 320
@@ -339,6 +311,34 @@ Color BLACK = (Color){.r = 0, .g = 0, .b = 0, .a = 255};
 Color BLANK = (Color){.r = 0, .g = 0, .b = 0, .a = 0};
 Color MAGENTA = (Color){.r = 255, .g = 0, .b = 255, .a = 255};
 Color RAYWHITE = (Color){.r = 245, .g = 245, .b = 245, .a = 255};
+
+// mem-management
+
+CART_FUNCTION("malloc")
+void* _wasm_host_malloc(size_t size) {
+  return malloc(size);
+}
+
+CART_FUNCTION("free")
+void _wasm_host_free(void* ptr) {
+  free(ptr);
+}
+
+// callbacks
+CART_FUNCTION("load")
+void load();
+
+CART_FUNCTION("update")
+void update(uint64_t timeMS);
+
+CART_FUNCTION("unload")
+void unload();
+
+CART_FUNCTION("buttonDown")
+void buttonDown(GamepadButton button);
+
+CART_FUNCTION("buttonUp")
+void buttonUp(GamepadButton button);
 
 
 // UTILS API
