@@ -329,7 +329,7 @@ CART_FUNCTION("load")
 void load();
 
 CART_FUNCTION("update")
-void update(uint64_t timeMS);
+void update();
 
 CART_FUNCTION("unload")
 void unload();

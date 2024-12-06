@@ -45,7 +45,7 @@ void run_tests() {
 }
 
 
-void update(uint64_t timeMS) {}
+void update() {}
 
 void load(){
   printf("cart (runtests): Hello from cart load.\n");

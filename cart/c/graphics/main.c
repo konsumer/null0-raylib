@@ -1,6 +1,6 @@
 #include "cart.h"
 
-void update(uint64_t timeMS) {
+void update() {
   clear(SKYBLUE);
 
   // ground

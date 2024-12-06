@@ -1,29 +1,9 @@
-// basic stuff that gets used all over
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <string.h>
-#include <stdlib.h>
-#include <raylib.h>
+// host implementations for emscripten/wamr
 
-#ifdef _WINDOWS
-#include <windows.h>
-#else
-#include <unistd.h>
-#define sleep(x) usleep((x)*1000)
-#endif
-
-#define CVECTOR_LOGARITHMIC_GROWTH
-#include "cvector.h"
-
-// filesystem utils (used by host)
-#include "fs.h"
+#include "host.h"
 
 // set this to false to stop
 bool keepRunning = true;
-
-// host implementations for emscripten/wamr
-#include "host.h"
 
 int main(int argc, char *argv[]) {
   if (argc != 2) {
@@ -49,19 +29,18 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  SetTraceLogLevel(LOG_ERROR);
+  // printf("loaded: %s\n", cartFilename);
 
+  SetTraceLogLevel(LOG_ERROR);
+  
   InitWindow(640, 480, "null0");
   SetTargetFPS(60);
-
   while (!WindowShouldClose()) {
     BeginDrawing();
     wasm_host_update();
     EndDrawing();
   }
-
   CloseWindow();
-
   wasm_host_unload();
   return 0;
 }

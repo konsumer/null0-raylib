@@ -20,7 +20,7 @@
     </style>
   </head>
   <body>
-    <canvas id="canvas"></canvas>
+    <canvas id="screen"></canvas>
   </body>
   <script type="importmap">
     {
@@ -49,7 +49,6 @@
       return host
     }
 
-    const cart_graphics=await loadCart('carts/graphics.null0', document.getElementById('canvas'))
-    // const cart_runtests=await loadCart('carts/runtests.null0', document.createElement('canvas'))
+    const cart_graphics=await loadCart('carts/graphics.null0', document.getElementById('screen'))
   </script>
 </html>

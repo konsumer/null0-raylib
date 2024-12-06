@@ -163,7 +163,7 @@ HOST_FUNCTION(void, draw_circle, (i32 centerX, i32 centerY, i32 radius, u32 colo
 // Draw a filled polygon on the screen
 HOST_FUNCTION(void, draw_polygon, (i32 centerX, i32 centerY, u32 sides, i32 radius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
-  DrawPoly(Vector2 (Vector2){.x=centerX, .y=centerY}, sides, (float) radius, 0, *color); 
+  DrawPoly((Vector2){.x=centerX, .y=centerY}, sides, (float) radius, 0, *color); 
   free(color);
 })
 
@@ -177,7 +177,7 @@ HOST_FUNCTION(void, draw_arc, (i32 centerX, i32 centerY, f32 radius, f32 startAn
 // Draw a filled round-rectangle on the screen
 HOST_FUNCTION(void, draw_rectangle_rounded, (i32 x, i32 y, i32 width, i32 height, f32 cornerRadius, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
-  DrawRectangleRounded(Rectangle (Rectangle){.x=x, .y=y, .width=width, .height=height}, cornerRadius, 0, *color); 
+  DrawRectangleRounded((Rectangle){.x=x, .y=y, .width=width, .height=height}, cornerRadius, 0, *color); 
   free(color);
 })
 

@@ -5,6 +5,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <libgen.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdlib.h>
 #include "physfs.h"
 
 // these are the supported filetypes we can detect
@@ -54,7 +59,7 @@ char* fs_get_cart_name(char* filename);
 // Get info about a file from native filesystem
 PHYSFS_Stat fs_file_info(char* filename);
 
-/////
+#ifdef FS_IMPLEMENTATION
 
 // call this to initialize filesystem
 bool fs_init(char* cartFilename) {
@@ -321,3 +326,5 @@ PHYSFS_Stat fs_file_info(char* filename) {
   PHYSFS_stat(filename, &stat);
   return stat;
 }
+
+#endif // FS_IMPLEMENTATION

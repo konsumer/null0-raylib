@@ -1,3 +1,5 @@
+#pragma once
+
 void hexdump(const void* data, size_t size) {
 	char ascii[17];
 	size_t i, j;
