@@ -9,7 +9,7 @@ This is null0 host, implemented with raylib.
 # get build-tools and stuff
 npm i
 
-# build everything: native/emscripten host host & carts
+# build everything: native/emscripten host & carts
 npm run build
 
 # just carts
