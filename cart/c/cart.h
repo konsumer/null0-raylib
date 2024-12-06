@@ -409,7 +409,7 @@ HOST_FUNCTION(void, draw_image_flipped, (Image src, i32 posX, i32 posY, bool fli
 HOST_FUNCTION(void, draw_image_scaled, (Image src, i32 posX, i32 posY, f32 scaleX, f32 scaleY, f32 offsetX, f32 offsetY, ImageFilter filter))
 
 // Draw some text on the screen
-HOST_FUNCTION(void, draw_text, (Font font, char* text, i32 posX, i32 posY, Color color))
+HOST_FUNCTION(void, draw_text, (u32 fontSize, char* text, i32 posX, i32 posY, Color color))
 
 // Save an image to persistant storage
 HOST_FUNCTION(void, save_image, (Image image, char* filename))
@@ -445,7 +445,7 @@ HOST_FUNCTION(u32, load_font_bmf, (char* filename, char* characters))
 HOST_FUNCTION(u32, load_font_bmf_from_image, (Image image, char* characters))
 
 // Measure the size of some text
-HOST_FUNCTION(u32, measure_text, (Font font, char* text))
+HOST_FUNCTION(u32, measure_text, (u32 fontSize, char* text))
 
 // Meaure an image (use 0 for screen)
 HOST_FUNCTION(u32, measure_image, (Image image))
@@ -541,7 +541,7 @@ HOST_FUNCTION(void, draw_image_flipped_on_image, (Image destination, Image src, 
 HOST_FUNCTION(void, draw_image_scaled_on_image, (Image destination, Image src, i32 posX, i32 posY, f32 scaleX, f32 scaleY, f32 offsetX, f32 offsetY, ImageFilter filter))
 
 // Draw some text on an image
-HOST_FUNCTION(void, draw_text_on_image, (Image destination, Font font, char* text, i32 posX, i32 posY, Color color))
+HOST_FUNCTION(void, draw_text_on_image, (Image destination, u32 fontSize, char* text, i32 posX, i32 posY, Color color))
 
 // Draw a 1px outlined rectangle on the screen
 HOST_FUNCTION(void, draw_rectangle_outline, (i32 posX, i32 posY, i32 width, i32 height, Color color))

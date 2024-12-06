@@ -170,7 +170,8 @@ HOST_FUNCTION(void, draw_polygon, (i32 centerX, i32 centerY, u32 sides, i32 radi
 // Draw a filled arc on the screen
 HOST_FUNCTION(void, draw_arc, (i32 centerX, i32 centerY, f32 radius, f32 startAngle, f32 endAngle, i32 segments, u32 colorPtr), {
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
-  // TODO
+  Vector2 center = (Vector2){.x=centerX, .y=centerY};
+  DrawCircleSector(center, radius, startAngle, endAngle, segments, *color);
   free(color);
 })
 
@@ -209,10 +210,10 @@ HOST_FUNCTION(void, draw_image_scaled, (u32 srcPtr, i32 posX, i32 posY, f32 scal
 })
 
 // Draw some text on the screen
-HOST_FUNCTION(void, draw_text, (u32 fontPtr, u32 textPtr, i32 posX, i32 posY, u32 colorPtr), {
+HOST_FUNCTION(void, draw_text, (u32 fontSize, u32 textPtr, i32 posX, i32 posY, u32 colorPtr), {
   char* text = copy_from_cart_string(textPtr);
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
-  // TODO
+  DrawText(text, posX, posY, fontSize, *color); 
   free(text);
   free(color);
 })
@@ -295,7 +296,7 @@ HOST_FUNCTION(u32, load_font_bmf_from_image, (u32 imagePtr, u32 charactersPtr), 
 })
 
 // Measure the size of some text
-HOST_FUNCTION(u32, measure_text, (u32 fontPtr, u32 textPtr), {
+HOST_FUNCTION(u32, measure_text, (u32 fontSize, u32 textPtr), {
   char* text = copy_from_cart_string(textPtr);
   // TODO
   free(text);
@@ -496,10 +497,10 @@ HOST_FUNCTION(void, draw_image_scaled_on_image, (u32 destinationPtr, u32 srcPtr,
 })
 
 // Draw some text on an image
-HOST_FUNCTION(void, draw_text_on_image, (u32 destinationPtr, u32 fontPtr, u32 textPtr, i32 posX, i32 posY, u32 colorPtr), {
+HOST_FUNCTION(void, draw_text_on_image, (u32 destinationPtr, u32 fontSize, u32 textPtr, i32 posX, i32 posY, u32 colorPtr), {
   char* text = copy_from_cart_string(textPtr);
   Color* color = copy_from_cart(colorPtr, sizeof(Color));
-  // TODO
+  ImageDrawText(&images[destinationPtr], text, posX, posY, fontSize, *color);
   free(text);
   free(color);
 })

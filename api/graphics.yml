@@ -175,7 +175,7 @@ draw_image_scaled:
 
 draw_text:
   arguments:
-    font: Font
+    fontSize: u32
     text: string
     posX: i32
     posY: i32
@@ -238,38 +238,9 @@ image_color_fade:
   returns: void
   description: Fade a color in an image, in-place
 
-font_copy:
-  arguments:
-    font: Font
-  returns: Font
-  description: Copy a font to a new font
-
-font_scale:
-  arguments:
-    font: Font
-    scaleX: f32
-    scaleY: f32
-    filter: ImageFilter
-  returns: Font
-  description: Scale a font, return a new font
-
-load_font_bmf:
-  arguments:
-    filename: string
-    characters: string
-  returns: Font
-  description: Load a BMF font from a file in cart
-
-load_font_bmf_from_image:
-  arguments:
-    image: Image
-    characters: string
-  returns: Font
-  description: Load a BMF font from an image
-
 measure_text:
   arguments:
-    font: Font
+    fontSize: u32
     text: string
   returns: Dimensions
   description: Measure the size of some text
@@ -553,7 +524,7 @@ draw_image_scaled_on_image:
 draw_text_on_image:
   arguments:
     destination: Image
-    font: Font
+    fontSize: u32
     text: string
     posX: i32
     posY: i32
