@@ -3,7 +3,6 @@
 #pragma once
 
 // basic stuff that gets used all over
-#include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
